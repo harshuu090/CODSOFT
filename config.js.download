@@ -1,3 +1,40 @@
+import { cn } from "@/lib/utils";
+
+interface CalculatorButtonProps {
+  children: React.ReactNode;
+  onClick: () => void;
+  className?: string;
+  variant?: "number" | "operator" | "equals" | "clear";
+}
+
+const CalculatorButton = ({ 
+  children, 
+  onClick, 
+  className = "", 
+  variant = "number" 
+}: CalculatorButtonProps) => {
+  const baseClasses = "h-16 rounded-xl font-semibold text-lg transition-all duration-200 active:scale-95 shadow-sm";
+  
+  const variantClasses = {
+    number: "bg-secondary hover:bg-secondary/80 text-secondary-foreground",
+    operator: "bg-primary hover:bg-primary/90 text-primary-foreground",
+    equals: "bg-accent hover:bg-accent/90 text-accent-foreground",
+    clear: "bg-destructive hover:bg-destructive/90 text-destructive-foreground"
+  };
+
+  return (
+    <button
+      onClick={onClick}
+      className={cn(baseClasses, variantClasses[variant], className)}
+    >
+      {children}
+    </button>
+  );
+};
+
+export default CalculatorButton;
+
+
 (function() {
   window._POSTHOG_REMOTE_CONFIG = window._POSTHOG_REMOTE_CONFIG || {};
   window._POSTHOG_REMOTE_CONFIG['phc_xdBVCyOkYw40Pqd7xp5Er88lGq2IGFd4kZHRiKvvkjr'] = {
